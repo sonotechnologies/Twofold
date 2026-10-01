@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
 import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 
 import { api } from '@/api';
@@ -11,17 +11,14 @@ const VoiceContext = createContext<Ctx>({ playingId: null, progress: 0, toggle: 
 export function VoicePlayerProvider({ children }: { children: ReactNode }) {
   const player = useAudioPlayer(null);
   const status = useAudioPlayerStatus(player);
-  const [playingId, setPlayingId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (status.didJustFinish) setPlayingId(null);
-  }, [status.didJustFinish]);
+  const [loadedId, setLoadedId] = useState<string | null>(null);
+  // Only "playing" while the player is actually playing, so a finished note shows play again.
+  const playingId = status.playing ? loadedId : null;
 
   const toggle = useCallback(
     async (id: string, path: string | null, localUri?: string) => {
       if (playingId === id) {
         player.pause();
-        setPlayingId(null);
         return;
       }
       const uri = localUri ?? (path ? await api.mediaUrl(path) : null);
@@ -29,7 +26,7 @@ export function VoicePlayerProvider({ children }: { children: ReactNode }) {
       await setAudioModeAsync({ playsInSilentMode: true, allowsRecording: false });
       player.replace({ uri });
       player.play();
-      setPlayingId(id);
+      setLoadedId(id);
     },
     [player, playingId],
   );

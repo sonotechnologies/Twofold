@@ -1,11 +1,11 @@
 // The small motion moments from the design: flame flicker, heartbeat pulse, idle bob, confetti.
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { AccessibilityInfo, Animated, Easing, View, type ViewStyle } from 'react-native';
 
 import { brand } from '@/theme/tokens';
 
 function useLoop(duration: number, delay = 0, easing = Easing.inOut(Easing.ease)) {
-  const v = useRef(new Animated.Value(0)).current;
+  const [v] = useState(() => new Animated.Value(0));
   useEffect(() => {
     let anim: Animated.CompositeAnimation | undefined;
     let cancelled = false;
@@ -31,7 +31,7 @@ function useLoop(duration: number, delay = 0, easing = Easing.inOut(Easing.ease)
 /** Teardrop flame (a rotated square with one sharp corner) that flickers. */
 export function Flame({ size = 16, color = brand.coral, still }: { size?: number; color?: string; still?: boolean }) {
   const loop = useLoop(1600);
-  const rest = useRef(new Animated.Value(0)).current;
+  const [rest] = useState(() => new Animated.Value(0));
   const t = (still ? rest : loop).interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, 1, 0] });
   return (
     <Animated.View

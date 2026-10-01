@@ -32,31 +32,34 @@ export function useChat(coupleId: string | undefined, me: string | null) {
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [offline, setOffline] = useState(false);
   const itemsRef = useRef(items);
-  itemsRef.current = items;
+  useEffect(() => {
+    itemsRef.current = items;
+  }, [items]);
   const cacheKey = `chat:${coupleId}`;
 
   const markRead = useCallback(() => {
     if (coupleId) api.markRead(coupleId).catch(() => {});
   }, [coupleId]);
 
-  const loadLatest = useCallback(async () => {
-    if (!coupleId) return;
-    try {
-      const latest = await api.listMessages(coupleId, undefined, PAGE);
-      setItems((prev) => merge(prev, latest));
-      setHasMore(latest.length === PAGE);
-      setOffline(false);
-      markRead();
-    } catch {
-      setOffline(true);
-    }
+  const loadLatest = useCallback(() => {
+    if (!coupleId) return Promise.resolve();
+    return api.listMessages(coupleId, undefined, PAGE).then(
+      (latest) => {
+        setItems((prev) => merge(prev, latest));
+        setHasMore(latest.length === PAGE);
+        setOffline(false);
+        markRead();
+      },
+      () => setOffline(true),
+    );
   }, [coupleId, markRead]);
 
   // Cached messages first, then the network.
   useEffect(() => {
     if (!coupleId) return;
-    readCache<Message[]>(cacheKey).then((cached) => cached && setItems((prev) => merge(cached, prev)));
-    loadLatest();
+    readCache<Message[]>(cacheKey)
+      .then((cached) => cached && setItems((prev) => merge(cached, prev)))
+      .then(loadLatest);
   }, [coupleId, cacheKey, loadLatest]);
 
   // Realtime: new messages and read receipts.

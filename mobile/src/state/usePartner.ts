@@ -6,14 +6,15 @@ import { useSession } from './session';
 
 export function usePartnerProfile() {
   const { partnerId } = useSession();
-  const [partner, setPartner] = useState<Profile | null>(null);
+  const [loaded, setLoaded] = useState<Profile | null>(null);
   useEffect(() => {
-    if (!partnerId) return setPartner(null);
+    if (!partnerId) return;
     let live = true;
-    api.getProfile(partnerId).then((p) => live && setPartner(p)).catch(() => {});
+    api.getProfile(partnerId).then((p) => live && setLoaded(p)).catch(() => {});
     return () => {
       live = false;
     };
   }, [partnerId]);
-  return partner;
+  // Ignore a profile left over from a previous partner.
+  return loaded && loaded.id === partnerId ? loaded : null;
 }
