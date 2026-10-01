@@ -84,6 +84,8 @@ select test.ok(public.couple_home() is null, 'pending couple has no home yet');
 select test.fails($$insert into public.messages (couple_id, body) values ((select v::uuid from t where k = 'couple'), 'hi')$$,
   'cannot message while pending');
 
+select test.ok((select count(*) from public.profiles) = 2, 'pending partners see each other (to confirm who it is)');
+
 -- Eve tries the same (now used) code, and cannot see the couple
 set request.jwt.claim.sub = 'eeeeeeee-0000-0000-0000-000000000003';
 select test.ok(public.redeem_invite((select v from t where k = 'code')) is null, 'used code cannot be redeemed again');
@@ -192,6 +194,17 @@ insert into storage.objects (bucket_id, name) values ('couple-media', (select v 
 select test.ok((select count(*) from storage.objects) = 2, 'partners read couple media');
 set request.jwt.claim.sub = 'eeeeeeee-0000-0000-0000-000000000003';
 select test.ok((select count(*) from storage.objects) = 0, 'outsiders read no media');
+
+-- ---------------------------------------------------------------- realtime presence channel
+set request.jwt.claim.sub = 'aaaaaaaa-0000-0000-0000-000000000001';
+select set_config('realtime.topic', 'couple:' || (select v from t where k = 'dc'), false);
+insert into realtime.messages (topic, extension) values (realtime.topic(), 'presence');
+select test.ok((select count(*) from realtime.messages) = 1, 'partner can use own couple channel');
+set request.jwt.claim.sub = 'eeeeeeee-0000-0000-0000-000000000003';
+select test.ok((select count(*) from realtime.messages) = 0, 'outsider cannot read couple channel');
+select test.fails($$insert into realtime.messages (topic, extension) values (realtime.topic(), 'presence')$$,
+  'outsider cannot join couple channel');
+select set_config('realtime.topic', '', false);
 
 -- ---------------------------------------------------------------- breakup
 set request.jwt.claim.sub = 'bbbbbbbb-0000-0000-0000-000000000002';

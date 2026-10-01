@@ -743,7 +743,8 @@ alter table public.answers         enable row level security;
 revoke all on all tables in schema public from anon, authenticated;
 revoke all on all sequences in schema public from anon, authenticated;
 
--- profiles: I manage my own; I can see my partner's (active, or ended < 30 days). Birthdate is write-only.
+-- profiles: I manage my own; I can see my partner's while pairing (so the inviter can see who entered
+-- their code), while active, and for 30 days after ending. Birthdate is write-only.
 grant select (id, name, avatar_config, mood, mood_updated_at, created_at, updated_at) on public.profiles to authenticated;
 grant insert (id, name, birthdate, avatar_config, mood) on public.profiles to authenticated;
 grant update (name, avatar_config, mood) on public.profiles to authenticated;
@@ -755,7 +756,7 @@ create policy profiles_select on public.profiles for select to authenticated
       select 1 from public.couples c
       where (select auth.uid()) in (c.partner_a, c.partner_b)
         and profiles.id in (c.partner_a, c.partner_b)
-        and public.can_read_couple(c.id)
+        and (c.status = 'pending' or public.can_read_couple(c.id))
     )
   );
 create policy profiles_insert on public.profiles for insert to authenticated
