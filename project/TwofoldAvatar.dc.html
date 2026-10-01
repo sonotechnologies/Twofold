@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:{{ w }}px;height:{{ h }}px;position:relative;flex:none">
+<div style="position:absolute;left:0;top:0;width:64px;height:96px;transform:{{ tf }};transform-origin:0 0">
+  <sc-if value="{{ isAfro }}"><div style="position:absolute;left:4px;top:0;width:56px;height:50px;border-radius:50%;background:{{ hc }}"></div></sc-if>
+  <sc-if value="{{ isBraids }}">
+    <div style="position:absolute;left:9px;top:20px;width:11px;height:56px;border-radius:999px;background:repeating-linear-gradient(180deg,{{ hc }} 0 6px,{{ hc2 }} 6px 8px)"></div>
+    <div style="position:absolute;left:44px;top:20px;width:11px;height:56px;border-radius:999px;background:repeating-linear-gradient(180deg,{{ hc }} 0 6px,{{ hc2 }} 6px 8px)"></div>
+    <div style="position:absolute;left:24px;top:0;width:16px;height:16px;border-radius:50%;background:{{ hc }}"></div>
+  </sc-if>
+  <sc-if value="{{ isLocs }}">
+    <div style="position:absolute;left:8px;top:18px;width:8px;height:48px;border-radius:999px;background:{{ hc }}"></div>
+    <div style="position:absolute;left:15px;top:22px;width:8px;height:52px;border-radius:999px;background:{{ hc }}"></div>
+    <div style="position:absolute;left:41px;top:22px;width:8px;height:52px;border-radius:999px;background:{{ hc }}"></div>
+    <div style="position:absolute;left:48px;top:18px;width:8px;height:48px;border-radius:999px;background:{{ hc }}"></div>
+  </sc-if>
+  <div style="position:absolute;left:{{ bodyL }}px;bottom:0;width:{{ bodyW }}px;height:44px;border-radius:26px 26px 12px 12px;background:{{ c1 }}"></div>
+  <sc-if value="{{ isAnkara }}"><div style="position:absolute;left:6px;bottom:0;width:52px;height:44px;border-radius:26px 26px 12px 12px;background:radial-gradient(circle,{{ c2 }} 2.6px,transparent 3px) 0 0/9px 9px"></div></sc-if>
+  <sc-if value="{{ isAgbada }}"><div style="position:absolute;left:26px;bottom:6px;width:12px;height:30px;border-radius:6px;background:{{ c2 }}"></div></sc-if>
+  <sc-if value="{{ isHoodie }}"><div style="position:absolute;left:20px;bottom:8px;width:24px;height:12px;border-radius:6px;background:{{ c2 }}"></div></sc-if>
+  <div style="position:absolute;left:26px;top:42px;width:12px;height:10px;border-radius:4px;background:{{ skin }}"></div>
+  <div style="position:absolute;left:14px;top:12px;width:36px;height:36px;border-radius:50%;background:{{ skin }}"></div>
+  <div style="position:absolute;left:24px;top:28px;width:4px;height:5px;border-radius:50%;background:#1A0A10"></div>
+  <div style="position:absolute;left:36px;top:28px;width:4px;height:5px;border-radius:50%;background:#1A0A10"></div>
+  <div style="position:absolute;left:27px;top:35px;width:10px;height:5px;border-bottom:2px solid #1A0A10;border-radius:0 0 8px 8px;box-sizing:border-box"></div>
+  <div style="position:absolute;left:18px;top:33px;width:6px;height:3px;border-radius:50%;background:#FF7A66;opacity:.55"></div>
+  <div style="position:absolute;left:40px;top:33px;width:6px;height:3px;border-radius:50%;background:#FF7A66;opacity:.55"></div>
+  <sc-if value="{{ isFade }}"><div style="position:absolute;left:13px;top:10px;width:38px;height:15px;border-radius:19px 19px 6px 6px;background:{{ hc }}"></div></sc-if>
+  <sc-if value="{{ isAfro }}"><div style="position:absolute;left:13px;top:8px;width:38px;height:14px;border-radius:19px 19px 8px 8px;background:{{ hc }}"></div></sc-if>
+  <sc-if value="{{ isBraids }}"><div style="position:absolute;left:13px;top:10px;width:38px;height:14px;border-radius:19px 19px 6px 6px;background:repeating-linear-gradient(90deg,{{ hc }} 0 4px,{{ hc2 }} 4px 5px)"></div></sc-if>
+  <sc-if value="{{ isLocs }}"><div style="position:absolute;left:12px;top:9px;width:40px;height:16px;border-radius:20px 20px 8px 8px;background:{{ hc }}"></div></sc-if>
+  <sc-if value="{{ isCornrows }}"><div style="position:absolute;left:13px;top:10px;width:38px;height:15px;border-radius:19px 19px 6px 6px;background:repeating-linear-gradient(90deg,{{ hc }} 0 3px,{{ hc2 }} 3px 5px)"></div></sc-if>
+  <sc-if value="{{ isWrap }}">
+    <div style="position:absolute;left:8px;top:0;width:48px;height:26px;border-radius:24px 24px 8px 8px;background:{{ c2 }}"></div>
+    <div style="position:absolute;left:40px;top:-6px;width:20px;height:16px;border-radius:50%;background:{{ c2 }}"></div>
+    <div style="position:absolute;left:8px;top:16px;width:48px;height:4px;background:{{ c1 }};opacity:.6"></div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;120px&quot;,&quot;height&quot;:&quot;160px&quot;},&quot;skin&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#8D5A3B&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hair&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fade&quot;,&quot;afro&quot;,&quot;braids&quot;,&quot;locs&quot;,&quot;cornrows&quot;,&quot;headwrap&quot;],&quot;default&quot;:&quot;fade&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hairColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1B1110&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;outfit&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tee&quot;,&quot;hoodie&quot;,&quot;ankara&quot;,&quot;agbada&quot;],&quot;default&quot;:&quot;tee&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;c1&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FF7A66&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;c2&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#E9B44C&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;scale&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props, s = parseFloat(p.scale ?? 1) || 1;
+    const hair = p.hair ?? 'fade', outfit = p.outfit ?? 'tee';
+    const hc = p.hairColor ?? '#1B1110';
+    return {
+      w: 64 * s, h: 96 * s, tf: `scale(${s})`,
+      skin: p.skin ?? '#8D5A3B', hc, hc2: p.hairColor2 ?? '#3A2420',
+      c1: p.c1 ?? '#FF7A66', c2: p.c2 ?? '#E9B44C',
+      bodyL: outfit === 'agbada' ? 1 : 6, bodyW: outfit === 'agbada' ? 62 : 52,
+      isFade: hair === 'fade', isAfro: hair === 'afro', isBraids: hair === 'braids', isLocs: hair === 'locs', isCornrows: hair === 'cornrows', isWrap: hair === 'headwrap',
+      isAnkara: outfit === 'ankara', isAgbada: outfit === 'agbada', isHoodie: outfit === 'hoodie'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:{{ w }}px;height:{{ h }}px;position:relative;flex:none">
+<div style="position:absolute;left:0;top:0;width:60px;height:52px;transform:{{ tf }};transform-origin:0 0">
+  <div style="position:absolute;left:6px;top:0;width:16px;height:18px;border-radius:50% 50% 30% 30%;background:{{ c }}"></div>
+  <div style="position:absolute;left:38px;top:0;width:16px;height:18px;border-radius:50% 50% 30% 30%;background:{{ c }}"></div>
+  <div style="position:absolute;left:0;top:6px;width:60px;height:46px;border-radius:50% 50% 44% 44%;background:{{ c }}"></div>
+  <div style="position:absolute;left:16px;top:28px;width:28px;height:20px;border-radius:50%;background:{{ belly }}"></div>
+  <sc-if value="{{ awake }}">
+    <div style="position:absolute;left:17px;top:20px;width:6px;height:7px;border-radius:50%;background:#1A0A10"></div>
+    <div style="position:absolute;left:37px;top:20px;width:6px;height:7px;border-radius:50%;background:#1A0A10"></div>
+  </sc-if>
+  <sc-if value="{{ sleepy }}">
+    <div style="position:absolute;left:15px;top:23px;width:9px;height:2px;border-radius:2px;background:#1A0A10"></div>
+    <div style="position:absolute;left:36px;top:23px;width:9px;height:2px;border-radius:2px;background:#1A0A10"></div>
+  </sc-if>
+  <sc-if value="{{ happy }}">
+    <div style="position:absolute;left:15px;top:19px;width:9px;height:6px;border-top:2px solid #1A0A10;border-radius:8px 8px 0 0;box-sizing:border-box"></div>
+    <div style="position:absolute;left:36px;top:19px;width:9px;height:6px;border-top:2px solid #1A0A10;border-radius:8px 8px 0 0;box-sizing:border-box"></div>
+  </sc-if>
+  <div style="position:absolute;left:27px;top:29px;width:6px;height:4px;border-radius:50%;background:#2A0B1C"></div>
+  <div style="position:absolute;left:9px;top:28px;width:7px;height:4px;border-radius:50%;background:#FF7A66;opacity:.6"></div>
+  <div style="position:absolute;left:44px;top:28px;width:7px;height:4px;border-radius:50%;background:#FF7A66;opacity:.6"></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;120px&quot;,&quot;height&quot;:&quot;110px&quot;},&quot;color&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FFC9B8&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;belly&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FFE6DC&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;awake&quot;,&quot;happy&quot;,&quot;sleepy&quot;],&quot;default&quot;:&quot;awake&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;scale&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props, s = parseFloat(p.scale ?? 1) || 1, m = p.mood ?? 'awake';
+    return { w: 60 * s, h: 52 * s, tf: `scale(${s})`, c: p.color ?? '#FFC9B8', belly: p.belly ?? '#FFE6DC',
+      awake: m === 'awake', sleepy: m === 'sleepy', happy: m === 'happy' };
+  }
+}
+</script>
+</body>
+</html>

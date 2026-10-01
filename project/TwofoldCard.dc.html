@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@keyframes tfShine{0%{transform:translateX(-120%)}60%,100%{transform:translateX(120%)}}
+@keyframes tfFlicker{0%,100%{transform:rotate(-45deg) scale(1)}50%{transform:rotate(-40deg) scale(1.12,.94)}}
+@keyframes tfBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+</helmet>
+<div style="width:{{ W }}px;height:{{ H }}px;border-radius:28px;overflow:hidden;position:relative;background:{{ bg }};box-sizing:border-box;flex:none;font-family:'Figtree',sans-serif">
+  <div style="position:absolute;width:{{ circ }}px;height:{{ circ }}px;border-radius:50%;background:{{ circBg }};left:50%;top:{{ circTop }}px;margin-left:{{ circML }}px"></div>
+  <sc-if value="{{ premium }}">
+    <div style="position:absolute;inset:0;border-radius:28px;box-shadow:inset 0 0 0 3px #E9B44C, inset 0 0 0 7px rgba(233,180,76,.25)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(246,210,122,.28) 50%,transparent 65%);animation:tfShine 3.6s ease-in-out infinite"></div>
+    <div style="position:absolute;top:18px;right:18px;padding:5px 9px;border-radius:999px;background:linear-gradient(135deg,#F6D27A,#E9B44C 50%,#C8902C);font:600 10px/1 'Fredoka';letter-spacing:.1em;color:#2A0B1C">PREMIUM</div>
+  </sc-if>
+  <sc-if value="{{ wrapped }}">
+    <div style="position:absolute;top:16px;left:18px;right:18px;display:flex;gap:4px"><sc-for list="{{ bars }}" as="b" hint-placeholder-count="4"><div style="flex:1;height:3px;border-radius:2px;background:#FBF3EC;opacity:{{ b }}"></div></sc-for></div>
+  </sc-if>
+
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:{{ pad }}px;box-sizing:border-box;gap:{{ gap }}px;text-align:center">
+    <div style="font:600 12px/1 'Figtree';letter-spacing:.12em;text-transform:uppercase;color:{{ eyebrowInk }}">{{ eyebrow }}</div>
+
+    <sc-if value="{{ k.couple }}">
+      <div style="display:flex;align-items:flex-end;animation:tfBob 3s ease-in-out infinite"><dc-import name="TwofoldAvatar" skin="#6B4226" hair="fade" outfit="agbada" c1="#F2E4CF" c2="#C9A25A" scale="{{ av }}" hint-size="100px,150px"></dc-import><dc-import name="TwofoldAvatar" skin="#8D5A3B" hair="braids" outfit="ankara" c1="#FF7A66" c2="#E9B44C" scale="{{ av }}" hint-size="100px,150px"></dc-import></div>
+      <div style="font:600 {{ f1 }}px/1 'Fredoka';color:#FBF3EC">David &amp; Bella</div>
+      <div style="font:600 14px/1 'Fredoka';color:#2A0B1C;background:{{ gold }};padding:8px 14px;border-radius:999px">Sweethearts</div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:20px;height:20px;background:#FF7A66;border-radius:50% 0 50% 50%;animation:tfFlicker 1.6s ease-in-out infinite"></div><div style="font:600 {{ f2 }}px/1 'Fredoka';color:#FBF3EC">42-day flame</div></div>
+      <div style="font:500 15px/1 'Figtree';color:#F2D9DF">Day 218 together on Twofold</div>
+    </sc-if>
+
+    <sc-if value="{{ k.rankup }}">
+      <div style="width:{{ emb }}px;height:{{ emb }}px;border-radius:50%;background:{{ gold }};display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(233,180,76,.18),0 0 0 22px rgba(233,180,76,.08)"><div style="position:relative;width:60px;height:40px"><div style="position:absolute;left:0;width:40px;height:40px;border-radius:50%;background:#5A1838"></div><div style="position:absolute;left:20px;width:40px;height:40px;border-radius:50%;background:#FF7A66;opacity:.92"></div></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><div style="font:500 {{ f3 }}px/1.1 'Figtree';color:#F2D9DF">We just became</div><div style="font:700 {{ f1 }}px/1 'Fredoka';color:{{ goldInk }}">Ride or Die</div></div>
+      <div style="display:flex;align-items:flex-end"><dc-import name="TwofoldAvatar" skin="#6B4226" hair="fade" outfit="agbada" c1="#F2E4CF" c2="#C9A25A" scale="{{ avS }}" hint-size="70px,105px"></dc-import><dc-import name="TwofoldAvatar" skin="#8D5A3B" hair="braids" outfit="ankara" c1="#FF7A66" c2="#E9B44C" scale="{{ avS }}" hint-size="70px,105px"></dc-import></div>
+      <div style="font:500 15px/1 'Figtree';color:#F2D9DF">David &amp; Bella · 3,000 bond points</div>
+    </sc-if>
+
+    <sc-if value="{{ k.milestone }}">
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ emb }}px;height:{{ emb }}px">
+        <div style="position:absolute;width:70%;height:70%;background:#FF7A66;border-radius:50% 0 50% 50%;animation:tfFlicker 1.8s ease-in-out infinite"></div>
+        <div style="position:relative;font:700 {{ fBig }}px/1 'Fredoka';color:#2A0B1C;margin-top:12px">100</div>
+      </div>
+      <div style="font:600 {{ f1 }}px/1 'Fredoka';color:#FBF3EC">day flame</div>
+      <div style="font:500 16px/1.4 'Figtree';color:#F2D9DF;max-width:260px">100 days in a row. We didn't break the flame.</div>
+      <div style="font:600 14px/1 'Fredoka';color:#2A0B1C;background:{{ gold }};padding:8px 14px;border-radius:999px">David &amp; Bella</div>
+    </sc-if>
+
+    <sc-if value="{{ k.anniversary }}">
+      <div style="display:flex;align-items:flex-end"><dc-import name="TwofoldAvatar" skin="#6B4226" hair="fade" outfit="agbada" c1="#F2E4CF" c2="#C9A25A" scale="{{ avS }}" hint-size="70px,105px"></dc-import><dc-import name="TwofoldAvatar" skin="#8D5A3B" hair="headwrap" outfit="ankara" c1="#FF7A66" c2="#E9B44C" scale="{{ avS }}" hint-size="70px,105px"></dc-import></div>
+      <div style="font:700 {{ fBig }}px/.9 'Fredoka';color:{{ goldInk }}">1 year</div>
+      <div style="font:600 {{ f3 }}px/1 'Fredoka';color:#FBF3EC">David &amp; Bella</div>
+      <div style="font:500 14px/1 'Figtree';color:#F2D9DF">Feb 14, 2026 – Feb 14, 2027</div>
+    </sc-if>
+
+    <sc-if value="{{ k.w1 }}">
+      <div style="font:700 {{ fBig }}px/.95 'Fredoka';color:#FBF3EC">Our<br>September</div>
+      <div style="display:flex;align-items:flex-end;margin-top:8px"><dc-import name="TwofoldAvatar" skin="#6B4226" hair="fade" outfit="agbada" c1="#F2E4CF" c2="#C9A25A" scale="{{ av }}" hint-size="100px,150px"></dc-import><dc-import name="TwofoldAvatar" skin="#8D5A3B" hair="braids" outfit="ankara" c1="#FF7A66" c2="#E9B44C" scale="{{ av }}" hint-size="100px,150px"></dc-import></div>
+      <div style="font:500 16px/1.4 'Figtree';color:#F2D9DF">David &amp; Bella's month, wrapped</div>
+    </sc-if>
+
+    <sc-if value="{{ k.w2 }}">
+      <div style="font:500 18px/1.2 'Figtree';color:#F2D9DF">We sent each other</div>
+      <div style="font:700 {{ fBig }}px/.9 'Fredoka';color:#FBF3EC">4,812</div>
+      <div style="font:600 24px/1 'Fredoka';color:#FBF3EC">messages</div>
+      <div style="width:100%;display:flex;flex-direction:column;gap:8px;margin-top:10px">
+        <div style="display:flex;height:14px;border-radius:7px;overflow:hidden"><div style="width:58%;background:#FF7A66"></div><div style="flex:1;background:{{ gold }}"></div></div>
+        <div style="display:flex;justify-content:space-between;font:600 13px/1 'Figtree';color:#F2D9DF"><div>Bella 58%</div><div>David 42%</div></div>
+      </div>
+      <div style="font:500 15px/1.4 'Figtree';color:#F2D9DF">David won on voice notes: 63 to 21.</div>
+    </sc-if>
+
+    <sc-if value="{{ k.w3 }}">
+      <div style="font:500 18px/1.2 'Figtree';color:#F2D9DF">Daily questions answered</div>
+      <div style="font:700 {{ fBig }}px/.9 'Fredoka';color:#FBF3EC">28<span style="font-size:40px;color:#F2D9DF">/30</span></div>
+      <div style="background:rgba(251,243,236,.1);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:8px;text-align:left;margin-top:8px">
+        <div style="font:600 11px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#FFB3A6">Answer of the month</div>
+        <div style="font:600 18px/1.3 'Fredoka';color:#FBF3EC">"The way you sing every song like you wrote it."</div>
+        <div style="font:500 13px/1 'Figtree';color:#F2D9DF">Bella, Sep 19</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ k.w4 }}">
+      <div style="font:700 {{ fBig }}px/.9 'Fredoka';color:{{ goldInk }}">+640</div>
+      <div style="font:600 24px/1 'Fredoka';color:#FBF3EC">bond this month</div>
+      <div style="width:100%;display:flex;flex-direction:column;gap:8px;margin-top:6px"><div style="height:12px;border-radius:6px;background:rgba(251,243,236,.15)"><div style="width:74%;height:100%;border-radius:6px;background:{{ gold }}"></div></div><div style="display:flex;justify-content:space-between;font:600 13px/1 'Figtree';color:#F2D9DF"><div>Sweethearts</div><div>Ride or Die</div></div></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px"><div style="width:18px;height:18px;background:#FF7A66;border-radius:50% 0 50% 50%;animation:tfFlicker 1.6s ease-in-out infinite"></div><div style="font:600 18px/1 'Fredoka';color:#FBF3EC">42 days and counting</div></div>
+      <div style="font:500 16px/1.4 'Figtree';color:#F2D9DF">See you in October.</div>
+    </sc-if>
+  </div>
+
+  <div style="position:absolute;left:{{ pad }}px;right:{{ pad }}px;bottom:{{ footB }}px;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:7px"><div style="position:relative;width:24px;height:16px"><div style="position:absolute;left:0;width:16px;height:16px;border-radius:50%;background:#FBF3EC"></div><div style="position:absolute;left:8px;width:16px;height:16px;border-radius:50%;background:#FF7A66;opacity:.92"></div></div><div style="font:600 17px/1 'Fredoka';color:#FBF3EC">twofold</div></div>
+    <div style="font:600 12px/1 'Figtree';color:#F2D9DF">Get Twofold</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;360px&quot;,&quot;height&quot;:&quot;640px&quot;},&quot;kind&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;couple&quot;,&quot;rankup&quot;,&quot;milestone&quot;,&quot;anniversary&quot;,&quot;w1&quot;,&quot;w2&quot;,&quot;w3&quot;,&quot;w4&quot;],&quot;default&quot;:&quot;couple&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;format&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;story&quot;,&quot;square&quot;],&quot;default&quot;:&quot;story&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;premium&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const kind = this.props.kind ?? 'couple', sq = (this.props.format ?? 'story') === 'square';
+    const premium = this.props.premium === true || this.props.premium === 'true';
+    const W = sq ? 400 : 360, H = sq ? 400 : 640;
+    const k = { couple: kind === 'couple', rankup: kind === 'rankup', milestone: kind === 'milestone', anniversary: kind === 'anniversary', w1: kind === 'w1', w2: kind === 'w2', w3: kind === 'w3', w4: kind === 'w4' };
+    const wrapped = kind[0] === 'w';
+    const wi = wrapped ? parseInt(kind[1]) : 0;
+    const eyebrows = { couple: 'Our couple card', rankup: 'Rank up', milestone: 'Milestone', anniversary: 'Anniversary', w1: 'Monthly Wrapped', w2: 'Wrapped · Chat', w3: 'Wrapped · Questions', w4: 'Wrapped · Bond' };
+    return {
+      W, H, premium, k, wrapped, eyebrow: eyebrows[kind],
+      bars: [1,2,3,4].map(i => i <= wi ? 1 : .3),
+      bg: premium ? '#14060E' : (wi === 2 || wi === 4 ? '#2A0B1C' : '#5A1838'),
+      circBg: premium ? '#3A1028' : (wi === 2 || wi === 4 ? '#5A1838' : '#7A2A52'),
+      circ: sq ? 420 : 520, circTop: sq ? 120 : 230, circML: sq ? -210 : -260,
+      gold: premium ? 'linear-gradient(135deg,#F6D27A,#E9B44C 50%,#C8902C)' : '#E9B44C',
+      goldInk: '#E9B44C', eyebrowInk: premium ? '#E9B44C' : '#FFB3A6',
+      pad: sq ? 28 : 30, gap: sq ? 10 : 16, footB: sq ? 22 : 28,
+      av: sq ? 1.15 : 1.6, avS: sq ? 0.9 : 1.1, emb: sq ? 96 : 140,
+      f1: sq ? 30 : 38, f2: sq ? 20 : 24, f3: sq ? 18 : 22, fBig: sq ? 64 : 96
+    };
+  }
+}
+</script>
+</body>
+</html>

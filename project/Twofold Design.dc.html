@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EDE7E2;font-family:'Figtree',sans-serif;color:#2A0B1C}a{color:#5A1838}a:hover{color:#E8604C}
+@keyframes tfFlicker{0%,100%{transform:rotate(-45deg) scale(1)}50%{transform:rotate(-40deg) scale(1.12,.94)}}
+@keyframes tfBeat{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,122,102,.55)}40%{transform:scale(1.15);box-shadow:0 0 0 6px rgba(255,122,102,0)}}</style>
+</helmet>
+
+<section data-screen-label="Brand" style="padding:72px 72px 40px;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:880px">
+    <div style="font:600 13px/1 'Figtree';letter-spacing:.12em;text-transform:uppercase;color:#7D5D6B">Twofold · Direction 1a Velvet</div>
+    <div style="font:600 56px/1.02 'Fredoka';color:#2A0B1C">A little world for two</div>
+    <div style="font:400 18px/1.5 'Figtree';color:#5B4450;text-wrap:pretty">Brand, system, 12 screens in light and dark, share cards and the avatar sheet. Avatars and pet are geometric stand-ins in the target style, ready to be replaced by final illustration.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1500px">
+    <div style="background:#FFFFFF;border-radius:32px;height:220px;display:flex;align-items:center;justify-content:center;gap:14px">
+      <div style="position:relative;width:64px;height:44px"><div style="position:absolute;left:0;width:44px;height:44px;border-radius:50%;background:#5A1838"></div><div style="position:absolute;left:20px;width:44px;height:44px;border-radius:50%;background:#FF7A66;mix-blend-mode:multiply"></div></div>
+      <div style="font:600 48px/1 'Fredoka';color:#2A0B1C">twofold</div>
+    </div>
+    <div style="background:#2A0B1C;border-radius:32px;height:220px;display:flex;align-items:center;justify-content:center;gap:14px">
+      <div style="position:relative;width:64px;height:44px"><div style="position:absolute;left:0;width:44px;height:44px;border-radius:50%;background:#FBF3EC"></div><div style="position:absolute;left:20px;width:44px;height:44px;border-radius:50%;background:#FF7A66;opacity:.92"></div></div>
+      <div style="font:600 48px/1 'Fredoka';color:#FBF3EC">twofold</div>
+    </div>
+    <div style="background:#FBF3EC;border-radius:32px;height:220px;display:flex;align-items:center;justify-content:center;gap:24px;border:1px solid #E5D6CB">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:120px;height:120px;border-radius:30px;background:#5A1838;display:flex;align-items:center;justify-content:center"><div style="position:relative;width:70px;height:48px"><div style="position:absolute;left:0;width:48px;height:48px;border-radius:50%;background:#FBF3EC"></div><div style="position:absolute;left:22px;width:48px;height:48px;border-radius:50%;background:#FF7A66;opacity:.92"></div></div></div><div style="font:500 12px/1 'Figtree';color:#7D5D6B">App icon</div></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:120px;height:120px;border-radius:30px;background:#14060E;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px #E9B44C"><div style="position:relative;width:70px;height:48px"><div style="position:absolute;left:0;width:48px;height:48px;border-radius:50%;background:#E9B44C"></div><div style="position:absolute;left:22px;width:48px;height:48px;border-radius:50%;background:#FF7A66;opacity:.92"></div></div></div><div style="font:500 12px/1 'Figtree';color:#7D5D6B">Premium alt icon</div></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:20px;max-width:1500px">
+    <div style="background:#FBF3EC;border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="font:600 20px/1 'Fredoka';color:#2A0B1C">Light</div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#FBF3EC;border:1px solid #E5D6CB"></div><div style="font:500 12px/1.35 'Figtree';color:#5B4450">Cream bg<br>#FBF3EC</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#FFFFFF;border:1px solid #E5D6CB"></div><div style="font:500 12px/1.35 'Figtree';color:#5B4450">Surface<br>#FFFFFF</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#5A1838"></div><div style="font:500 12px/1.35 'Figtree';color:#5B4450">Wine<br>#5A1838</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#2A0B1C"></div><div style="font:500 12px/1.35 'Figtree';color:#5B4450">Ink<br>#2A0B1C</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#FF7A66"></div><div style="font:500 12px/1.35 'Figtree';color:#5B4450">Coral<br>#FF7A66</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#E9B44C"></div><div style="font:500 12px/1.35 'Figtree';color:#5B4450">Rank gold<br>#E9B44C</div></div>
+      </div>
+    </div>
+    <div style="background:#160810;border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="font:600 20px/1 'Fredoka';color:#FBF3EC">Dark</div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#160810;border:1px solid #3A2030"></div><div style="font:500 12px/1.35 'Figtree';color:#B497A5">Night bg<br>#160810</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#24101A"></div><div style="font:500 12px/1.35 'Figtree';color:#B497A5">Surface<br>#24101A</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#3A1028"></div><div style="font:500 12px/1.35 'Figtree';color:#B497A5">Room<br>#3A1028</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#FBF3EC"></div><div style="font:500 12px/1.35 'Figtree';color:#B497A5">Ink<br>#FBF3EC</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#FF7A66"></div><div style="font:500 12px/1.35 'Figtree';color:#B497A5">Coral (primary)<br>#FF7A66</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:72px;border-radius:18px;background:#E9B44C"></div><div style="font:500 12px/1.35 'Figtree';color:#B497A5">Rank gold<br>#E9B44C</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border-radius:32px;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:1436px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Fredoka · headings &amp; scores</div>
+      <div style="font:600 56px/1 'Fredoka';color:#2A0B1C">2,480</div>
+      <div style="font:600 34px/1.1 'Fredoka';color:#2A0B1C">Don't break the flame.</div>
+      <div style="font:600 22px/1.2 'Fredoka';color:#2A0B1C">Your pet misses you both</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Figtree · chat &amp; body</div>
+      <div style="font:600 17px/1.4 'Figtree';color:#2A0B1C">Buttons and labels · 17 / 600</div>
+      <div style="font:400 16px/1.45 'Figtree';color:#2A0B1C">Chat and body copy · 16 / 400. I'll have suya waiting. Hurry home.</div>
+      <div style="font:500 13px/1.4 'Figtree';color:#7D5D6B">Captions and meta · 13 / 500. Day 42 together on Twofold</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Components" style="padding:40px 72px;display:flex;flex-direction:column;gap:24px">
+  <div style="font:600 36px/1 'Fredoka';color:#2A0B1C">Components</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px;max-width:1500px">
+    <div style="background:#FBF3EC;border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Buttons</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <div style="height:52px;padding:0 24px;border-radius:999px;background:#5A1838;color:#FBF3EC;font:600 16px/52px 'Figtree'">Primary</div>
+        <div style="height:52px;padding:0 24px;border-radius:999px;background:#FF7A66;color:#2A0B1C;font:600 16px/52px 'Figtree'">Coral</div>
+        <div style="height:52px;padding:0 24px;border-radius:999px;background:#FFFFFF;color:#2A0B1C;font:600 16px/52px 'Figtree'">Secondary</div>
+        <div style="height:52px;padding:0 24px;border-radius:999px;background:linear-gradient(135deg,#F6D27A,#E9B44C 50%,#C8902C);color:#2A0B1C;font:600 16px/52px 'Figtree'">Go Premium</div>
+        <div style="height:52px;padding:0 24px;border-radius:999px;border:1.5px solid #D9C5B8;box-sizing:border-box;color:#5B4450;font:600 16px/49px 'Figtree'">Ghost</div>
+      </div>
+    </div>
+    <div style="background:#FBF3EC;border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:10px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B;margin-bottom:6px">Chat bubbles</div>
+      <div style="align-self:flex-start;max-width:280px;background:#FFFFFF;color:#2A0B1C;font:400 16px/1.38 'Figtree';padding:11px 15px;border-radius:22px 22px 22px 8px">Third Mainland is not moving at all</div>
+      <div style="align-self:flex-end;max-width:280px;background:#5A1838;color:#FBF3EC;font:400 16px/1.38 'Figtree';padding:11px 15px;border-radius:22px 22px 8px 22px">I'll have suya waiting. Hurry home</div>
+      <div style="align-self:flex-end;max-width:280px;background:#FF7A66;color:#2A0B1C;font:400 16px/1.38 'Figtree';padding:11px 15px;border-radius:22px 22px 8px 22px">Dark mode: my bubble goes coral</div>
+    </div>
+    <div style="background:#FBF3EC;border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Rank chips</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <div style="font:600 15px/1 'Fredoka';color:#5A1838;background:#FFD9CF;padding:9px 14px;border-radius:999px">New Flame</div>
+        <div style="font:600 15px/1 'Fredoka';color:#2A0B1C;background:#E9B44C;padding:9px 14px;border-radius:999px">Sweethearts</div>
+        <div style="font:600 15px/1 'Fredoka';color:#2A0B1C;background:#E9B44C;padding:9px 14px;border-radius:999px;box-shadow:inset 0 0 0 2px #5A1838">Ride or Die</div>
+        <div style="font:600 15px/1 'Fredoka';color:#E9B44C;background:#2A0B1C;padding:9px 14px;border-radius:999px">Power Couple</div>
+        <div style="font:600 15px/1 'Fredoka';color:#2A0B1C;background:linear-gradient(135deg,#F6D27A,#E9B44C 50%,#C8902C);padding:9px 14px;border-radius:999px;box-shadow:0 0 0 3px rgba(233,180,76,.3)">Soulmates</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="display:flex;align-items:center;gap:6px;background:#FFFFFF;padding:9px 14px 9px 12px;border-radius:999px"><div style="width:16px;height:16px;background:#FF7A66;border-radius:50% 0 50% 50%;animation:tfFlicker 1.6s ease-in-out infinite"></div><div style="font:600 18px/1 'Fredoka';color:#2A0B1C">42</div></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 14px 9px 10px;border-radius:999px;background:#5A1838"><div style="width:10px;height:10px;border-radius:50%;background:#FF7A66;animation:tfBeat 1.4s ease-out infinite"></div><div style="font:600 14px/1 'Figtree';color:#FBF3EC">Bella is online</div></div>
+      </div>
+    </div>
+    <div style="background:#FBF3EC;border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Badges</div>
+      <div style="display:flex;gap:14px">
+        <div style="width:64px;height:64px;border-radius:22px;background:#FF7A66;display:flex;align-items:center;justify-content:center;font:600 18px/1 'Fredoka';color:#2A0B1C;transform:rotate(-4deg)">1</div>
+        <div style="width:64px;height:64px;border-radius:22px;background:#E9B44C;display:flex;align-items:center;justify-content:center;font:600 18px/1 'Fredoka';color:#2A0B1C;transform:rotate(-4deg)">7</div>
+        <div style="width:64px;height:64px;border-radius:22px;background:#5A1838;display:flex;align-items:center;justify-content:center;font:600 18px/1 'Fredoka';color:#FBF3EC;transform:rotate(-4deg)">NO</div>
+        <div style="width:64px;height:64px;border-radius:22px;background:#F4E6DC;display:flex;align-items:center;justify-content:center;font:600 18px/1 'Fredoka';color:#7D5D6B;transform:rotate(-4deg);opacity:.6">100</div>
+      </div>
+      <div style="font:400 14px/1.4 'Figtree';color:#5B4450">Earned badges in brand colours, tilted for play. Locked badges sit flat in surface tone.</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Avatar & pet sheet" style="padding:40px 72px;display:flex;flex-direction:column;gap:24px">
+  <div style="font:600 36px/1 'Fredoka';color:#2A0B1C">Avatars &amp; pet</div>
+  <div style="background:#FBF3EC;border-radius:32px;padding:32px;display:flex;flex-direction:column;gap:28px;max-width:1436px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Hair</div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <sc-for list="{{ hairSheet }}" as="a" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;background:#FFFFFF;border-radius:24px;padding:16px 18px 12px"><dc-import name="TwofoldAvatar" skin="{{ a.skin }}" hair="{{ a.hair }}" outfit="{{ a.outfit }}" c1="{{ a.c1 }}" c2="{{ a.c2 }}" scale="1.4" hint-size="90px,134px"></dc-import><div style="font:600 13px/1 'Figtree';color:#5B4450">{{ a.label }}</div></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Outfits</div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <sc-for list="{{ outfitSheet }}" as="a" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;background:#FFFFFF;border-radius:24px;padding:16px 18px 12px"><dc-import name="TwofoldAvatar" skin="{{ a.skin }}" hair="{{ a.hair }}" outfit="{{ a.outfit }}" c1="{{ a.c1 }}" c2="{{ a.c2 }}" scale="1.4" hint-size="90px,134px"></dc-import><div style="font:600 13px/1 'Figtree';color:#5B4450">{{ a.label }}</div></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Skin tones</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end">
+        <sc-for list="{{ skinSheet }}" as="c" hint-placeholder-count="6"><dc-import name="TwofoldAvatar" skin="{{ c }}" hair="fade" outfit="tee" c1="#5A1838" c2="#E9B44C" scale="1.1" hint-size="70px,106px"></dc-import></sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font:500 12px/1 'Figtree';letter-spacing:.1em;text-transform:uppercase;color:#7D5D6B">Puff, the shared pet</div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <sc-for list="{{ petSheet }}" as="p" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;background:#FFFFFF;border-radius:24px;padding:20px 22px 14px"><dc-import name="TwofoldPet" mood="{{ p.mood }}" color="{{ p.c }}" belly="{{ p.b }}" scale="1.6" hint-size="96px,83px"></dc-import><div style="font:600 13px/1 'Figtree';color:#5B4450">{{ p.label }}</div></div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Screens" style="padding:40px 72px;display:flex;flex-direction:column;gap:48px">
+  <div style="font:600 36px/1 'Fredoka';color:#2A0B1C">Screens · light and dark</div>
+  <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font:600 15px/1 'Figtree';color:#FBF3EC;background:#5A1838;padding:7px 12px;border-radius:999px">{{ g.n }}</div><div style="font:600 28px/1 'Fredoka';color:#2A0B1C">{{ g.title }}</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:48px">
+        <sc-for list="{{ g.states }}" as="s" hint-placeholder-count="1">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font:600 14px/1 'Figtree';color:#5B4450">{{ s.label }}</div>
+            <div style="display:flex;gap:20px">
+              <dc-import name="TwofoldScreen" screen="{{ s.id }}" theme="light" hint-size="410px,864px"></dc-import>
+              <dc-import name="TwofoldScreen" screen="{{ s.id }}" theme="dark" hint-size="410px,864px"></dc-import>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-for>
+</section>
+
+<section data-screen-label="Share cards" style="padding:40px 72px 96px;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:8px"><div style="font:600 36px/1 'Fredoka';color:#2A0B1C">Share cards</div><div style="font:400 16px/1.5 'Figtree';color:#5B4450">9:16 for Stories and Status, 1:1 for feed. Premium versions get a gold frame and a moving shine.</div></div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="font:600 22px/1 'Fredoka';color:#2A0B1C">Couple card</div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end">
+      <dc-import name="TwofoldCard" kind="couple" format="story" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="couple" format="story" premium="{{ true }}" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="couple" format="square" hint-size="400px,400px"></dc-import>
+      <dc-import name="TwofoldCard" kind="couple" format="square" premium="{{ true }}" hint-size="400px,400px"></dc-import>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="font:600 22px/1 'Fredoka';color:#2A0B1C">Rank-up and milestones</div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end">
+      <dc-import name="TwofoldCard" kind="rankup" format="story" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="rankup" format="story" premium="{{ true }}" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="milestone" format="story" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="rankup" format="square" hint-size="400px,400px"></dc-import>
+      <dc-import name="TwofoldCard" kind="milestone" format="square" premium="{{ true }}" hint-size="400px,400px"></dc-import>
+      <dc-import name="TwofoldCard" kind="anniversary" format="square" premium="{{ true }}" hint-size="400px,400px"></dc-import>
+      <dc-import name="TwofoldCard" kind="anniversary" format="square" hint-size="400px,400px"></dc-import>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="font:600 22px/1 'Fredoka';color:#2A0B1C">Monthly Wrapped · 4 story slides</div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px">
+      <dc-import name="TwofoldCard" kind="w1" format="story" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="w2" format="story" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="w3" format="story" hint-size="360px,640px"></dc-import>
+      <dc-import name="TwofoldCard" kind="w4" format="story" premium="{{ true }}" hint-size="360px,640px"></dc-import>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const G = (n, title, states) => ({ n, title, states: states.map(([id, label]) => ({ id, label })) });
+    return {
+      groups: [
+        G('01', 'Onboarding', [['welcome','Welcome'],['phone','Sign up with phone'],['avatar','Create your avatar']]),
+        G('02', 'Pair up', [['invite','Invite with code or link'],['waiting','Waiting'],['linked',"You're linked"]]),
+        G('03', 'Home · Our Space', [['home','Home']]),
+        G('04', 'Chat', [['chat','Chat with Soften this']]),
+        G('05', 'Daily question', [['dqAnswer','Answer, partner locked'],['dqReveal','Reveal']]),
+        G('06', 'Pet and room', [['pet','Feed and play'],['shop','Decorate and shop']]),
+        G('07', 'Memories', [['memories','Timeline and countdown']]),
+        G('08', 'Location', [['location','Sharing']]),
+        G('09', 'Ranks and badges', [['ranks','Rank and badges']]),
+        G('10', 'Couple friends leaderboard', [['leaderboard','Leaderboard']]),
+        G('11', 'Premium paywall', [['paywall','Paywall']]),
+        G('12', 'Settings and breakup', [['settings','Privacy settings'],['endFlow','End relationship'],['endConfirm','Confirm']])
+      ],
+      hairSheet: [
+        { label:'Low fade', skin:'#6B4226', hair:'fade', outfit:'tee', c1:'#5A1838', c2:'#E9B44C' },
+        { label:'Afro', skin:'#8D5A3B', hair:'afro', outfit:'tee', c1:'#FF7A66', c2:'#E9B44C' },
+        { label:'Braids', skin:'#8D5A3B', hair:'braids', outfit:'tee', c1:'#E9B44C', c2:'#5A1838' },
+        { label:'Locs', skin:'#4A2C1A', hair:'locs', outfit:'tee', c1:'#7A2A52', c2:'#E9B44C' },
+        { label:'Cornrows', skin:'#B5784F', hair:'cornrows', outfit:'tee', c1:'#FFB3A6', c2:'#5A1838' },
+        { label:'Gele headwrap', skin:'#6B4226', hair:'headwrap', outfit:'tee', c1:'#5A1838', c2:'#E9B44C' } ],
+      outfitSheet: [
+        { label:'Agbada', skin:'#6B4226', hair:'fade', outfit:'agbada', c1:'#F2E4CF', c2:'#C9A25A' },
+        { label:'Agbada, wine', skin:'#4A2C1A', hair:'cornrows', outfit:'agbada', c1:'#5A1838', c2:'#E9B44C' },
+        { label:'Ankara', skin:'#8D5A3B', hair:'braids', outfit:'ankara', c1:'#FF7A66', c2:'#E9B44C' },
+        { label:'Ankara + gele', skin:'#B5784F', hair:'headwrap', outfit:'ankara', c1:'#2A0B1C', c2:'#FF7A66' },
+        { label:'Hoodie', skin:'#D9A07A', hair:'afro', outfit:'hoodie', c1:'#7A2A52', c2:'#5A1838' } ],
+      skinSheet: ['#F1C8A4','#D9A07A','#B5784F','#8D5A3B','#6B4226','#4A2C1A'],
+      petSheet: [
+        { label:'Awake', mood:'awake', c:'#FFC9B8', b:'#FFE6DC' },
+        { label:'Happy, just fed', mood:'happy', c:'#FFC9B8', b:'#FFE6DC' },
+        { label:'Sleepy, misses you both', mood:'sleepy', c:'#FFC9B8', b:'#FFE6DC' },
+        { label:'Premium gold coat', mood:'happy', c:'#E9B44C', b:'#F6D27A' } ]
+    };
+  }
+}
+</script>
+</body>
+</html>
