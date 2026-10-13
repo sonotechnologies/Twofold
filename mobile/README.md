@@ -7,7 +7,7 @@ Visual design follows `../project/Twofold Design.dc.html`, direction 1a "Velvet"
 
 | Area | Screens |
 | --- | --- |
-| Onboarding | Welcome · phone sign-in (OTP) or Google · name + birthday (18+) · avatar builder |
+| Onboarding | Welcome · sign in with WhatsApp (you send us a code, so it's free) or Google · name + birthday (18+) · avatar builder |
 | Pairing | Invite with code / WhatsApp / share link · enter a code · waiting · confirm · "You're linked" |
 | Our Space | Home: both avatars, partner presence + mood, streak flame, bond score, rank, today's question |
 | Chat | Realtime text, photos (compressed), voice notes, read receipts, offline cache, retry on failure |
@@ -28,10 +28,11 @@ npm install
 # Try it without a backend: a built-in demo partner "Bella" joins your code, confirms, and replies.
 npm run demo          # then press "a" for Android, "i" for iOS, or "w" for web
 
-# Against Supabase
-cp .env.example .env.local   # add EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY
+# Against Supabase (mobile/.env already points at the Twofold project)
 npm start
 ```
+
+Full setup (database, Google, WhatsApp, installing on a phone): [`docs/SETUP.md`](../docs/SETUP.md).
 
 Voice notes, camera, image compression and sharing use native modules, so on a phone use a development build
 (`npx expo run:android`, or `npx eas-cli@latest build --profile development`) rather than Expo Go.
@@ -47,7 +48,7 @@ mobile/
 └── src/
     ├── app/                 Routes (Expo Router). Every file is a screen.
     │   ├── _layout.tsx      Fonts, theme, session, and the gate that routes by stage
-    │   ├── (onboarding)/    welcome, phone, about-you, avatar
+    │   ├── (onboarding)/    welcome, sign-in, about-you, avatar
     │   ├── (pair)/          invite, join, waiting, confirm
     │   ├── (main)/          Tabs: home, rank, you (custom floating tab bar)
     │   ├── chat.tsx         Full-screen chat (opened from the Chat tab)
@@ -82,5 +83,6 @@ over Supabase Realtime, so both phones move on together.
 - **Rank thresholds follow the product brief** (500 / 2,000 / 5,000 / 15,000), not the sample numbers in the mock (1,000 / 3,000 / 7,500).
 - The design's tab bar has Home, Chat, Memories, Map, Friends. Phase 1 ships Home, Chat, Rank, Us; Memories, Map and Friends join in later phases.
 - Added for the brief's rules (not in the mock): "About you" step for the 18+ check, a confirm step for the inviter, Google sign-in, delete account.
+- Phone sign-in is "Verify with WhatsApp" instead of SMS codes: the person sends a pre-filled message to the Twofold number, so nothing is paid per code.
 - The invite code is 6 characters (brief) shown as `4K9·X2P`; the mock showed 7.
-- `constants/links.ts` has a placeholder download URL (`twofold.app`). Replace before launch.
+- Invites and cards link to the Play Store listing for `com.sonotechnologies.twofold` (`constants/links.ts`); it works once the app is published.

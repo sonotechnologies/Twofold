@@ -18,7 +18,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 /** Where each stage lives. The first entry is the default screen for that stage. */
 const allowed: Record<Exclude<Stage, 'loading'>, string[]> = {
-  signedOut: ['(onboarding)/welcome', '(onboarding)/phone'],
+  signedOut: ['(onboarding)/welcome', '(onboarding)/sign-in'],
   needsProfile: ['(onboarding)/about-you', '(onboarding)/avatar'],
   unpaired: ['(pair)/invite', '(pair)/join', '(pair)/waiting'],
   awaitingPartner: ['(pair)/waiting'],

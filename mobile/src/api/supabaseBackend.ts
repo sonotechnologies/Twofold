@@ -6,7 +6,7 @@ import type { PostgrestError } from '@supabase/supabase-js';
 import { newId } from '@/lib/ids';
 import { supabase } from '@/lib/supabase';
 
-import type { Backend } from './backend';
+import type { Backend, WhatsAppStart } from './backend';
 import { ApiError, type Couple, type Home, type Invite, type InvitePreview, type Message, type Profile, type QuestionState } from './types';
 
 const MEDIA_BUCKET = 'couple-media';
@@ -27,6 +27,16 @@ function rowOrNull<T extends { id?: unknown; code?: unknown }>(row: T | null): T
   return row && (row.id ?? row.code) != null ? row : null;
 }
 
+/** Edge function errors carry a JSON body like {"error":"not_configured"}. */
+async function errorCode(error: unknown): Promise<string | undefined> {
+  const res = (error as { context?: Response }).context;
+  try {
+    return res ? ((await res.json()) as { error?: string }).error : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 const signedUrls = new Map<string, { url: string; expires: number }>();
 
 export const supabaseBackend: Backend = {
@@ -40,14 +50,23 @@ export const supabaseBackend: Backend = {
     return () => data.subscription.unsubscribe();
   },
 
-  async sendOtp(phone) {
-    const { error } = await supabase.auth.signInWithOtp({ phone });
-    if (error) fail(error);
+  async startWhatsApp() {
+    const { data, error } = await supabase.functions.invoke('wa-start', { method: 'POST' });
+    if (error) {
+      const code = await errorCode(error);
+      fail({ message: code === 'not_configured' ? 'WhatsApp sign-in isn’t set up yet. Use Google for now.' : 'Couldn’t start WhatsApp sign-in. Check your connection.', hint: code });
+    }
+    return data as WhatsAppStart;
   },
 
-  async verifyOtp(phone, code) {
-    const { error } = await supabase.auth.verifyOtp({ phone, token: code, type: 'sms' });
-    if (error) fail({ message: 'That code didn’t work. Check it and try again.' });
+  async completeWhatsApp({ token, secret }) {
+    const { data, error } = await supabase.functions.invoke('wa-complete', { method: 'POST', body: { token, secret } });
+    if (error) fail({ message: 'Couldn’t finish signing in. Check your connection.' });
+    const res = data as { status: 'pending' | 'expired' | 'ok'; access_token?: string; refresh_token?: string };
+    if (res.status !== 'ok') return res.status;
+    const { error: sessionError } = await supabase.auth.setSession({ access_token: res.access_token!, refresh_token: res.refresh_token! });
+    if (sessionError) fail(sessionError);
+    return 'signedIn';
   },
 
   async signInWithGoogle() {

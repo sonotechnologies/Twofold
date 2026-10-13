@@ -16,7 +16,7 @@ export default function Welcome() {
   const { t } = useTheme();
   const start = (join: boolean) => {
     pairingIntent.setJoin(join);
-    router.push('/phone');
+    router.push('/sign-in');
   };
 
   return (

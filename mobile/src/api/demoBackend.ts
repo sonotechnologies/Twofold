@@ -31,6 +31,7 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const s = {
   userId: null as string | null,
+  waReadyAt: 0,
   me: null as Profile | null,
   couple: null as Couple | null,
   invite: null as Invite | null,
@@ -99,14 +100,17 @@ export const demoBackend: Backend = {
     authListeners.add(cb);
     return () => authListeners.delete(cb);
   },
-  async sendOtp() {
-    await wait(500);
+  async startWhatsApp() {
+    await wait(300);
+    s.waReadyAt = Date.now() + 3000; // pretend the message arrives a few seconds after WhatsApp opens
+    return { token: 'TF4K9X', secret: 'demo', waUrl: 'https://wa.me/2340000000000?text=Twofold%20code%3A%20TF4K9X', expiresAt: new Date(Date.now() + 600e3).toISOString() };
   },
-  async verifyOtp(_phone, code) {
-    await wait(500);
-    if (!/^\d{6}$/.test(code)) throw new ApiError('That code didn’t work. Check it and try again.');
+  async completeWhatsApp() {
+    await wait(200);
+    if (Date.now() < s.waReadyAt) return 'pending';
     s.userId = ME;
     authListeners.forEach((cb) => cb(ME));
+    return 'signedIn';
   },
   async signInWithGoogle() {
     await wait(500);

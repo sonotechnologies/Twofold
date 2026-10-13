@@ -1,5 +1,17 @@
 import type { Couple, Home, Invite, InvitePreview, MediaMeta, Message, MessageType, Profile, QuestionState } from './types';
 
+export type WhatsAppStart = {
+  /** Short code shown in the app and inside the pre-filled WhatsApp message. */
+  token: string;
+  /** Kept on this device only; proves the sign-in is completed by the same phone that started it. */
+  secret: string;
+  /** wa.me link that opens WhatsApp with the message ready to send. */
+  waUrl: string;
+  expiresAt: string;
+};
+
+export type WhatsAppResult = 'pending' | 'expired' | 'signedIn';
+
 export type NewMessage = {
   couple_id: string;
   type: MessageType;
@@ -14,8 +26,10 @@ export interface Backend {
   // auth
   getUserId(): Promise<string | null>;
   onAuthChange(cb: (userId: string | null) => void): () => void;
-  sendOtp(phone: string): Promise<void>;
-  verifyOtp(phone: string, code: string): Promise<void>;
+  /** "Verify with WhatsApp": the person sends us a message, so nothing is paid per code. */
+  startWhatsApp(): Promise<WhatsAppStart>;
+  /** Poll until the WhatsApp message arrives; signs in on 'signedIn'. */
+  completeWhatsApp(start: WhatsAppStart): Promise<WhatsAppResult>;
   /** Returns false if the person closed the Google sheet. */
   signInWithGoogle(): Promise<boolean>;
   signOut(): Promise<void>;

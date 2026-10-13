@@ -16,6 +16,7 @@ Postgres schema, Row Level Security, storage and realtime rules, plus one edge f
 | `daily_activity` | which partner interacted on which couple-day | none |
 | `daily_questions` / `answers` | rotating question; answers hidden until both answered | via RPC |
 | `invite_attempts` | rate-limits code guessing (15/hour) | none |
+| `wa_verifications` / `wa_identities` | "Verify with WhatsApp" tokens, and which number owns which account | none (edge functions only) |
 
 Rules enforced in the database (not the app):
 
@@ -29,19 +30,20 @@ Rules enforced in the database (not the app):
 - Presence uses a private realtime channel `couple:<id>` that only the two partners can join.
 - Every function and table starts with no access; grants are explicit (default privileges are revoked too).
 
+Sign-in is Google, or "Verify with WhatsApp": `wa-start` makes a token and wa.me link, the person sends the
+pre-filled message, Meta delivers it to `wa-webhook` (signature-checked), and the app exchanges token + device
+secret for a session at `wa-complete`. Nothing is sent back, so there's no per-code fee.
+
 Client RPCs: `create_invite`, `revoke_invite`, `preview_invite`, `redeem_invite`, `confirm_couple`, `decline_couple`,
 `end_couple`, `set_started_on`, `mark_read`, `daily_question_state`, `submit_answer`, `couple_home`.
 
 ## Setup
 
-1. Create a Supabase project (free tier) and link it: `npx supabase link --project-ref <ref>`.
-2. Apply migrations: `npx supabase db push`.
-3. Deploy the account-deletion function: `npx supabase functions deploy delete-account`.
-4. Auth → Providers:
-   - **Phone**: needs an SMS provider (Twilio, Vonage, MessageBird or Textlocal). **These are paid**, so none is configured yet.
-     Until you choose one, test numbers in `config.toml` (`2348000000001` etc., code `123456`) work locally, and you can add the same test numbers in the dashboard.
-   - **Google**: create an OAuth client in Google Cloud (free) and set the client ID/secret.
-   - Add `twofold://auth-callback` to the redirect URLs.
+Step-by-step instructions: [`docs/SETUP.md`](../docs/SETUP.md). In short: paste `setup/all-migrations.sql` into
+the SQL Editor (or `npx supabase db push`), deploy the four edge functions, enable Google, and set the WhatsApp
+secrets `WHATSAPP_BUSINESS_NUMBER`, `WHATSAPP_VERIFY_TOKEN` and `META_APP_SECRET`.
+
+`setup/all-migrations.sql` is generated: run `setup/build.sh` after adding a migration.
 
 ## Tests
 
@@ -51,4 +53,5 @@ realtime channel access, breakup and account deletion.
 
 ```bash
 supabase/tests/local/run.sh    # needs psql with a superuser connection (PG* env vars are respected)
+node --experimental-strip-types --test supabase/functions/_shared/whatsapp.test.ts   # WhatsApp parsing + signature
 ```

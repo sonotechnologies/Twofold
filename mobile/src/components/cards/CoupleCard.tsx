@@ -8,7 +8,6 @@ import { Avatar } from '@/components/avatar/Avatar';
 import { LogoMark } from '@/components/brand/Logo';
 import { Bob, Flame } from '@/components/brand/motion';
 import { Text } from '@/components/ui/Text';
-import { GET_TWOFOLD_URL } from '@/constants/links';
 import { rankName } from '@/constants/ranks';
 import { brand, fonts } from '@/theme/tokens';
 
@@ -77,7 +76,7 @@ export const CoupleCard = forwardRef<View, Props>(function CoupleCard({ format, 
           </Text>
         </View>
         <Text style={{ fontFamily: fonts.bodySemibold, fontSize: 12 }} color={brand.rose}>
-          Get Twofold · {GET_TWOFOLD_URL.replace(/^https?:\/\//, '')}
+          Get Twofold on Google Play
         </Text>
       </View>
     </View>

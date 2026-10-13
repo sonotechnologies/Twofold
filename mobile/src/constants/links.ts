@@ -1,6 +1,8 @@
 // Public links used in invites and share cards.
-// TODO before launch: replace with the real store / landing page URL.
-export const GET_TWOFOLD_URL = 'https://twofold.app';
+// The Play Store address is fixed by the app ID (app.json → android.package), so it works as soon as
+// the app is published.
+export const ANDROID_PACKAGE = 'com.sonotechnologies.twofold';
+export const GET_TWOFOLD_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
 
 export const formatCode = (code: string) => (code.length === 6 ? `${code.slice(0, 3)}·${code.slice(3)}` : code);
 

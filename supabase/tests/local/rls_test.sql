@@ -2,7 +2,7 @@
 -- Run through run.sh. Any failed assertion stops the script with an error.
 
 create schema test;
-grant usage on schema test to anon, authenticated;
+grant usage on schema test to anon, authenticated, service_role;
 
 create function test.ok(cond boolean, msg text) returns void language plpgsql as $$
 begin
@@ -24,7 +24,7 @@ begin
   end;
   raise exception 'FAIL: % (no error raised)', msg;
 end $$;
-grant execute on all functions in schema test to anon, authenticated;
+grant execute on all functions in schema test to anon, authenticated, service_role;
 
 insert into auth.users (id, phone) values
   ('aaaaaaaa-0000-0000-0000-000000000001', '2348000000001'), -- David
@@ -234,5 +234,23 @@ reset role;
 delete from auth.users where id = 'cccccccc-0000-0000-0000-000000000004';
 select test.ok((select status from public.couples where id = (select v::uuid from t where k = 'couple2')) = 'ended',
   'deleting an account ends its couple');
+
+-- ---------------------------------------------------------------- WhatsApp verification
+set role authenticated;
+set request.jwt.claim.sub = 'eeeeeeee-0000-0000-0000-000000000003';
+select test.fails($$select * from public.wa_verifications$$, 'clients cannot read WhatsApp verifications');
+select test.fails($$select public.wa_mark_verified('ABCDEF', '2348031234567')$$, 'clients cannot mark a token verified');
+reset role;
+set role service_role;
+insert into public.wa_verifications (token, secret_hash) values ('ABCDEF', 'hash1');
+select test.ok(public.wa_consume('ABCDEF', 'hash1') = '', 'unverified token reports waiting');
+select test.ok(public.wa_consume('ABCDEF', 'wrong') is null, 'wrong secret is rejected');
+select test.ok(public.wa_mark_verified('abcdef', '2348031234567'), 'webhook marks token verified (case-insensitive)');
+select test.ok(not public.wa_mark_verified('ABCDEF', '2348000000000'), 'a verified token cannot be re-pointed');
+select test.ok(public.wa_consume('ABCDEF', 'hash1') = '2348031234567', 'device with the secret gets the phone');
+select test.ok(public.wa_consume('ABCDEF', 'hash1') is null, 'token is single-use');
+insert into public.wa_verifications (token, secret_hash, expires_at) values ('XYZ234', 'h', now() - interval '1 minute');
+select test.ok(not public.wa_mark_verified('XYZ234', '2348031234567'), 'expired token cannot be verified');
+reset role;
 
 \echo 'rls_test.sql: all assertions passed'
